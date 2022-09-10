@@ -52,7 +52,7 @@ func main() {
 	}
 
 	wg.Add(2)
-	go AddChefToKithen(kitchen, chef1, "added")
+	AddChefToKithen(kitchen, chef1, "added")
 	go func() {
 		CookPizza(kitchen, 1)
 		defer wg.Done()
@@ -62,7 +62,6 @@ func main() {
 		defer wg.Done()
 	}()
 	time.Sleep(2 * time.Second)
-	go AddChefToKithen(kitchen, chef2, "added")
+	AddChefToKithen(kitchen, chef2, "added")
 	wg.Wait()
-
 }
