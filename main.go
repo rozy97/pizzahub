@@ -6,13 +6,14 @@ import (
 
 	"github.com/rozy97/pizzahub/src/domain"
 	"github.com/rozy97/pizzahub/src/handler"
+	"github.com/rozy97/pizzahub/src/helper"
 	"github.com/rozy97/pizzahub/src/repository"
 	"github.com/rozy97/pizzahub/src/usecase"
 )
 
 func main() {
 
-	kitchenChan := make(chan *domain.Chef, 1000)
+	kitchenChan := make(chan *domain.Chef, helper.KITCHEN_CAPACITY)
 
 	kitchenRepository := repository.NewKitchenRepository(kitchenChan)
 	chefRepository := repository.NewChefRepository()
