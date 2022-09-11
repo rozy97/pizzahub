@@ -11,6 +11,6 @@ type ChefUsecase interface {
 
 type ChefRepository interface {
 	InsertChef(chef Chef) (Chef, error)
-	GetChefs() ([]Chef, error)
-	GetChef(ID int) (Chef, error)
+	// GetChefs() ([]Chef, error)
+	// GetChef(ID int) (Chef, error)
 }
