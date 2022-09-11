@@ -9,6 +9,10 @@ type Order struct {
 
 type OrderUsecase interface {
 	AddOrder(order Order) (Order, error)
-	GetOrders() ([]Order, error)
-	GetOrder(ID int) (Order, error)
+	// GetOrders() ([]Order, error)
+	// GetOrder(ID int) (Order, error)
+}
+
+type OrderRepository interface {
+	InsertOrder(order Order) (Order, error)
 }
