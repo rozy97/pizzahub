@@ -15,5 +15,11 @@ func NewChefUsecase(repository domain.ChefRepository, kitchenRepo domain.Kitchen
 }
 
 func (usecase *ChefUsecase) AddChef(chef domain.Chef) (domain.Chef, error) {
-	return usecase.repository.InsertChef(chef)
+	chef, err := usecase.repository.InsertChef(chef)
+	if err != nil {
+		return chef, err
+	}
+
+	usecase.kitchenRepo.AddChefToKitchen(&chef, "newly added")
+	return chef, nil
 }

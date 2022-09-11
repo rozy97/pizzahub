@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/rozy97/pizzahub/src/domain"
 	"github.com/rozy97/pizzahub/src/handler"
 	"github.com/rozy97/pizzahub/src/repository"
 	"github.com/rozy97/pizzahub/src/usecase"
@@ -11,8 +12,11 @@ import (
 
 func main() {
 
+	kitchenChan := make(chan *domain.Chef, 1000)
+
+	kitchenRepository := repository.NewKitchenRepository(kitchenChan)
 	chefRepository := repository.NewChefRepository()
-	chefUsecase := usecase.NewChefUsecase(chefRepository)
+	chefUsecase := usecase.NewChefUsecase(chefRepository, kitchenRepository)
 	chefHandler := handler.NewChefHTTPHandler(chefUsecase)
 
 	menuRepository := repository.NewMenuRepository()
@@ -20,7 +24,7 @@ func main() {
 	menuHandler := handler.NewMenuHTTPHandler(menuUsecase)
 
 	orderRepository := repository.NewOrderRepository()
-	orderUsecase := usecase.NewOrderUsecase(orderRepository)
+	orderUsecase := usecase.NewOrderUsecase(orderRepository, kitchenRepository, menuRepository)
 	orderHandler := handler.NewOrderHTTPHandler(orderUsecase)
 
 	http.HandleFunc("/chef", chefHandler.Chef)

@@ -1,11 +1,9 @@
 package domain
 
-import "time"
-
 type Menu struct {
-	ID       int           `json:"id"`
-	Name     string        `json:"name"`
-	Duration time.Duration `json:"-"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Duration int64  `json:"-"`
 }
 
 type MenuUsecase interface {
@@ -14,6 +12,6 @@ type MenuUsecase interface {
 
 type MenuRepository interface {
 	GetMenus() ([]Menu, error)
-	// GetMenu(ID int) (Menu, error)
+	GetMenu(ID int) (Menu, error)
 	// InsertMenu(menu Menu) (Menu, error)
 }

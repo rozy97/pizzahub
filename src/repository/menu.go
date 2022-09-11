@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"time"
+	"errors"
 
 	"github.com/rozy97/pizzahub/src/domain"
 )
@@ -9,23 +9,34 @@ import (
 type MenuRepository struct {
 }
 
+var menus = []domain.Menu{
+	{
+		ID:       1,
+		Name:     "Pizza Cheese",
+		Duration: 3,
+	},
+	{
+		ID:       2,
+		Name:     "Pizza BBQ",
+		Duration: 5,
+	},
+}
+
 func NewMenuRepository() *MenuRepository {
 	return &MenuRepository{}
 }
 
 func (usecase *MenuRepository) GetMenus() ([]domain.Menu, error) {
-	menus := []domain.Menu{
-		{
-			ID:       1,
-			Name:     "Pizza Cheese",
-			Duration: 3 * time.Second,
-		},
-		{
-			ID:       2,
-			Name:     "Pizza BBQ",
-			Duration: 5 * time.Second,
-		},
-	}
+
 	return menus, nil
-	// return nil, errors.New("error from repository")
+}
+
+func (usecase *MenuRepository) GetMenu(ID int) (domain.Menu, error) {
+	for _, menu := range menus {
+		if menu.ID == ID {
+			return menu, nil
+		}
+	}
+
+	return domain.Menu{}, errors.New("menu not available")
 }
