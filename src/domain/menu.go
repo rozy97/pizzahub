@@ -14,6 +14,6 @@ type MenuUsecase interface {
 
 type MenuRepository interface {
 	GetMenus() ([]Menu, error)
-	GetMenu(ID int) (Menu, error)
-	InsertMenu(menu Menu) (Menu, error)
+	// GetMenu(ID int) (Menu, error)
+	// InsertMenu(menu Menu) (Menu, error)
 }
