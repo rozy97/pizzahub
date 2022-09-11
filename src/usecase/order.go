@@ -3,12 +3,14 @@ package usecase
 import "github.com/rozy97/pizzahub/src/domain"
 
 type OrderUsecase struct {
-	repository domain.OrderRepository
+	repository  domain.OrderRepository
+	kitchenRepo domain.KitchenRepository
 }
 
-func NewOrderUsecase(repository domain.OrderRepository) *OrderUsecase {
+func NewOrderUsecase(repository domain.OrderRepository, kitchenRepo domain.KitchenRepository) *OrderUsecase {
 	return &OrderUsecase{
-		repository: repository,
+		repository:  repository,
+		kitchenRepo: kitchenRepo,
 	}
 }
 

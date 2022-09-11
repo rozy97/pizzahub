@@ -3,12 +3,14 @@ package usecase
 import "github.com/rozy97/pizzahub/src/domain"
 
 type ChefUsecase struct {
-	repository domain.ChefRepository
+	repository  domain.ChefRepository
+	kitchenRepo domain.KitchenRepository
 }
 
-func NewChefUsecase(repository domain.ChefRepository) *ChefUsecase {
+func NewChefUsecase(repository domain.ChefRepository, kitchenRepo domain.KitchenRepository) *ChefUsecase {
 	return &ChefUsecase{
-		repository: repository,
+		repository:  repository,
+		kitchenRepo: kitchenRepo,
 	}
 }
 
